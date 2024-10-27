@@ -29,6 +29,11 @@ topology:
     pc1:
       kind: linux
       image: praqma/network-multitool:latest
+      exec:
+        - ip addr add 192.51.100.2/30 dev eth1
+        - ip link set eth1 up
+        - ip route del 0.0.0.0/0
+        - ip route add 0.0.0.0/0 via 192.51.100.1
 
   links:
     - endpoints: ["router0:eth1", "router1:eth1"]
